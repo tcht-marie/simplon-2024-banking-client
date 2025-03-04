@@ -1,6 +1,6 @@
 import "./Post.css";
 
-function Post({ id, username, avatar, attachments = [], getPost, getOwner, children }) {
+export default function Post({ id, username, avatar, attachments = [], getPost, getOwner, children }) {
   const handleComment = () => {
     // TODO: Implement comment functionality
     console.log('Comment clicked on post:', id);
@@ -50,7 +50,8 @@ function Post({ id, username, avatar, attachments = [], getPost, getOwner, child
               );
             }
             case 'image':
-              return (<img key={`post-${id}-attachment-${index}`} src={attachment.image} />);
+              // TODO: Add possibility to users to add custom `alt` on image attachments.
+              return (<img key={`post-${id}-attachment-${index}`} width='100%' src={attachment.image} alt={`${username}'s post attachment picture`} />);
             case 'link':
               return (<a key={`post-${id}-attachment-${index}`} href={attachment.link}>{attachment.link}</a>);
             default:
@@ -75,5 +76,3 @@ function Post({ id, username, avatar, attachments = [], getPost, getOwner, child
     </div>
   );
 }
-
-export default Post;

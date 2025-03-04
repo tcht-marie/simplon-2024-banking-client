@@ -1,13 +1,16 @@
 import React from 'react';
+import Loader from './Loader';
 import './FeedSwitch.css';
 
-export default function FeedSwitch({ currentFeed, onChange }) {
+export default function FeedSwitch({ currentFeed, isLoading, onChange }) {
   return (
-    <button 
+    <button
       className="feed-switch"
-      onClick={() => onChange(!currentFeed)}
+      aria-label='Button to switch between trengind and newest.'
+      onClick={onChange}
+      style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
     >
-      {currentFeed ? '🔥 Trending' : '⭐ Newest'}
+      {isLoading && <Loader />}{currentFeed ? '🔥 Trending' : '⭐ Newest'}
     </button>
   );
 }

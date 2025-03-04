@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import "./App.css";
 import Post from "../components/Post";
 import Login from "../components/Login";
@@ -7,21 +7,34 @@ import { useAuth, AuthProvider } from "../contexts/AuthContext";
 import { getNewestPosts, getTrendingPosts /*, getNewestPosts */ } from "../services/postService";
 
 const TRENDING_FEED=true;
-const NEWEST_FEED=true;
+const NEWEST_FEED=false;
 
 function AppContent() {
-  const { auth } = useAuth();
+  const { auth, login } = useAuth();
   const [posts, setPosts] = useState({content: []});
   const [currentFeed, setCurrentFeed] = useState(TRENDING_FEED);
+  const [isLoadingFeed, setIsLoadingFeed] = useState(true);
+
+  const handleSwitchFeed = useCallback(()=>{
+    setIsLoadingFeed(true);
+    if(currentFeed === TRENDING_FEED) {
+      setCurrentFeed(NEWEST_FEED);
+    } else {
+      setCurrentFeed(TRENDING_FEED);
+    }
+  }, [currentFeed, setCurrentFeed, setIsLoadingFeed]);
   
   useEffect(() => {
     if (auth) {
       const feed = currentFeed ? getTrendingPosts(auth) : getNewestPosts(auth);
       feed
         .then(setPosts)
+        .then(()=>setIsLoadingFeed(false))
         .catch(error => console.error('Error fetching posts:', error));
+    } else {
+      // login('admin', 'admin');
     }
-  }, [auth, currentFeed]);
+  }, [auth, currentFeed, login, setIsLoadingFeed]);
 
   const [postsMap, owners] = useMemo(() => {
     const ownersMap = new Map();
@@ -64,7 +77,7 @@ function AppContent() {
   return (
     <div className="app-container">
       <h1 className="header-title">Miniature</h1>
-      <FeedSwitch currentFeed={currentFeed} onChange={setCurrentFeed}></FeedSwitch>
+      <FeedSwitch currentFeed={currentFeed} isLoading={isLoadingFeed} onChange={handleSwitchFeed}></FeedSwitch>
       <div className="posts-container">
         {posts.content?.map(post => {
           const owner = typeof post.owner === 'object'
@@ -90,12 +103,10 @@ function AppContent() {
   );
 }
 
-function App() {
+export default function App() {
   return (
     <AuthProvider>
       <AppContent />
     </AuthProvider>
   );
 }
-
-export default App;
