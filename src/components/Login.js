@@ -31,7 +31,7 @@ export default function Login() {
   return (
     <div
       className="login-container"
-      aria-label="Container for form login and register"
+      aria-label="Container form login and register"
     >
       <h2>{isLogin ? "Login" : "Register"}</h2>
       {error && <div className="error">{error}</div>}

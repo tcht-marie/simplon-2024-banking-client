@@ -70,4 +70,7 @@
   - sauvegarde du token dans le local storage
 
 - Fichier App.css :
+
   - suppression de css non utilisé
+
+- Ajout d'aria-label dans toutes les div (et il y en avait beaucoup)
