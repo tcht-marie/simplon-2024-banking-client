@@ -26,3 +26,7 @@
 
 - Mode Mobile :
   - problème de responsive !!
+
+### Liens
+
+[Rapport lighthouse](./LIGHTHOUSECI.md)
