@@ -68,8 +68,9 @@ export default function TransactionList() {
     return groups;
   }, {});
 
-  const getCategoryById = (categoryId) => {
-    return categories.find(cat => cat.id === categoryId) || { color: '#gray' };
+  const getCategoryColor = (categoryId) => {
+    const category = categories.find(c => c.id === categoryId);
+    return category ? category.color : '#gray';
   };
 
   return (
@@ -84,7 +85,7 @@ export default function TransactionList() {
             <div key={transaction.id} className="transaction-item">
               <div 
                 className="category-color-indicator"
-                style={{ backgroundColor: getCategoryById(transaction.categoryId).color }}
+                style={{ backgroundColor: getCategoryColor(transaction.categoryId) }}
               />
               <div className="transaction-content">
                 <div className="transaction-title">{transaction.title}</div>
