@@ -17,20 +17,22 @@ export default function Login() {
       setAuthLoading(true);
       setError("");
 
-      const success = isLogin
-        ? await login(username, password)
-        : await register(username, password);
+      isLogin
+        ? await login(username, password).catch(() => setError("Login failed"))
+        : await register(username, password).catch(() =>
+            setError("Registration failed")
+          );
 
-      if (!success) {
-        setError(isLogin ? "Login failed" : "Registration failed");
-      }
       setAuthLoading(false);
     },
     [isLogin, username, password, login, register, setAuthLoading]
   );
 
   return (
-    <div className="login-container">
+    <div
+      className="login-container"
+      aria-label="Container for form login and register"
+    >
       <h2>{isLogin ? "Login" : "Register"}</h2>
       {error && <div className="error">{error}</div>}
       {authLoading && <Loader />}
@@ -44,13 +46,13 @@ export default function Login() {
         />
         <input
           type="password"
+          aria-label="Password field"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">{isLogin ? "Login" : "Register"}</button>
       </form>
-      {/* ajout d'une classe pour modification css */}
       <button
         onClick={() => setIsLogin(!isLogin)}
         className="button-login-or-register"

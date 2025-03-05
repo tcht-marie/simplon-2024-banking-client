@@ -33,4 +33,18 @@
 
 ### Corrections
 
-- Problème de contraste sur le formulaire de connexion et register :
+- Page Home -> Login et Register :
+
+  - changement de la couleur sur les boutons (bleu plus foncé)
+  - changement des couleurs du hover
+  - ajout de marges entre les deux boutons pour plus de visibilité
+  - responsive pour mobile ok
+  - ajout messages d'erreurs pour les inputs
+  - ajout aria-label : à la div + au deuxième input
+
+- Page Transactions :
+
+  - ajout message pour dire qu'il faut ajouter un moyen de paiement avant d'ajouter une transaction + click sur message pour accès direct à la page payment methods
+  - déplacement du bouton d'ajout de transactions pour qu'il soit plus visible et accessible au user
+  - changement couleur du bouton et du hover
+  -

@@ -63,12 +63,17 @@
   align-items: center;
 }
 
+.login-container button:hover {
+  color: black;
+  background: #85c1ff;
+}
+
 .login-container .error {
   color: red;
   margin-bottom: 10px;
   text-align: center;
 }
-/* add media queries for mobile responsive */
+/* add media queries for mobile responsive for page home */
 @media (max-width: 600px) {
   .login-container {
     max-width: 70%;
@@ -174,6 +179,20 @@
   padding: 1rem;
 }
 
+.list-header {
+  display: flex;
+  justify-content: space-around;
+}
+
+.transaction-text {
+  text-align: center;
+}
+
+.transaction-text-link {
+  text-decoration: none;
+  color: black;
+}
+
 .date-group {
   margin-bottom: 2rem;
 }
@@ -261,13 +280,12 @@ textarea {
 
 /* FAB button */
 .fab-button {
-  position: fixed;
   bottom: 2rem;
   right: 2rem;
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #007bff;
+  background-color: #004aa3;
   color: white;
   border: none;
   font-size: 24px;
@@ -279,7 +297,8 @@ textarea {
 }
 
 .fab-button:hover {
-  background-color: #0056b3;
+  color: black;
+  background-color: #85c1ff;
 }
 
 /* Category and Payment Method list styles */

@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import { getTransactions, createTransaction } from '../services/transactionService';
-import { getCategories } from '../services/categoryService';
-import { getPaymentMethods } from '../services/paymentMethodService';
-import Modal from './Modal';
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import {
+  getTransactions,
+  createTransaction,
+} from "../services/transactionService";
+import { getCategories } from "../services/categoryService";
+import { getPaymentMethods } from "../services/paymentMethodService";
+import Modal from "./Modal";
+import { Link } from "react-router-dom";
 
 export default function TransactionList() {
   const { auth } = useAuth();
@@ -12,12 +16,12 @@ export default function TransactionList() {
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [showNewForm, setShowNewForm] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     amount: null,
-    date: new Date().toISOString().split('T')[0],
+    date: new Date().toISOString().split("T")[0],
     categoryId: null,
-    paymentMethodId: null
+    paymentMethodId: null,
   });
 
   useEffect(() => {
@@ -25,7 +29,7 @@ export default function TransactionList() {
       Promise.all([
         getTransactions(auth),
         getCategories(auth),
-        getPaymentMethods(auth)
+        getPaymentMethods(auth),
       ]).then(([transactionsData, categoriesData, paymentMethodsData]) => {
         setTransactions(transactionsData);
         setCategories(categoriesData);
@@ -42,22 +46,22 @@ export default function TransactionList() {
       setTransactions(updatedTransactions);
       setShowNewForm(false);
       setFormData({
-        title: '',
-        description: '',
+        title: "",
+        description: "",
         amount: null,
-        date: new Date().toISOString().split('T')[0],
+        date: new Date().toISOString().split("T")[0],
         categoryId: null,
-        paymentMethodId: null
+        paymentMethodId: null,
       });
     } catch (error) {
-      console.error('Failed to create transaction:', error);
+      console.error("Failed to create transaction:", error);
     }
   };
 
   const formatAmount = (amount) => {
-    return Number(amount).toLocaleString('en-EU', {
+    return Number(amount).toLocaleString("en-EU", {
       minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+      maximumFractionDigits: 2,
     });
   };
 
@@ -69,27 +73,50 @@ export default function TransactionList() {
   }, {});
 
   const getCategoryColor = (categoryId) => {
-    const category = categories.find(c => c.id === categoryId);
-    return category ? category.color : '#gray';
+    const category = categories.find((c) => c.id === categoryId);
+    return category ? category.color : "#gray";
   };
 
   return (
-    <div className="transaction-list">
-      <h2>Transactions</h2>
-      <button className="fab-button" onClick={() => setShowNewForm(true)}>+</button>
-      
+    <div className="transaction-list" aria-label="Transaction List">
+      <section className="list-header">
+        <h2>Transactions</h2>
+        <button className="fab-button" onClick={() => setShowNewForm(true)}>
+          +
+        </button>
+      </section>
+      <section className="transaction-list-text">
+        <p className="transaction-text">
+          Before adding a transaction, please add a payment method.
+        </p>
+        <Link to="/payment-methods" className="transaction-text-link">
+          <p className="transaction-text">
+            You can click here to go to payment methods page.
+          </p>
+        </Link>
+      </section>
+
       {Object.entries(groupedTransactions).map(([date, transactions]) => (
-        <div key={date} className="date-group">
+        <div key={date} className="date-group" aria-label="Date Group">
           <h3>{date}</h3>
-          {transactions.map(transaction => (
-            <div key={transaction.id} className="transaction-item">
-              <div 
+          {transactions.map((transaction) => (
+            <div
+              key={transaction.id}
+              className="transaction-item"
+              aria-label="Transaction Item"
+            >
+              <div
                 className="category-color-indicator"
-                style={{ backgroundColor: getCategoryColor(transaction.categoryId) }}
+                aria-label="Category Color Indicator"
+                style={{
+                  backgroundColor: getCategoryColor(transaction.categoryId),
+                }}
               />
               <div className="transaction-content">
                 <div className="transaction-title">{transaction.title}</div>
-                <div className="transaction-amount">{formatAmount(transaction.amount)}€</div>
+                <div className="transaction-amount">
+                  {formatAmount(transaction.amount)}€
+                </div>
               </div>
             </div>
           ))}
@@ -106,35 +133,43 @@ export default function TransactionList() {
             type="text"
             placeholder="Title"
             value={formData.title}
-            onChange={e => setFormData({...formData, title: e.target.value})}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
             required
           />
           <textarea
             placeholder="Description"
             value={formData.description}
-            onChange={e => setFormData({...formData, description: e.target.value})}
+            onChange={(e) =>
+              setFormData({ ...formData, description: e.target.value })
+            }
           />
           <input
             type="number"
             placeholder="Amount"
-            value={formData.amount || ''}
+            value={formData.amount || ""}
             step="0.01"
-            onChange={e => setFormData({...formData, amount: Number(e.target.value)})}
+            onChange={(e) =>
+              setFormData({ ...formData, amount: Number(e.target.value) })
+            }
             required
           />
           <input
             type="date"
             value={formData.date}
-            onChange={e => setFormData({...formData, date: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
             required
           />
           <select
             value={formData.categoryId}
-            onChange={e => setFormData({...formData, categoryId: Number(e.target.value)})}
+            onChange={(e) =>
+              setFormData({ ...formData, categoryId: Number(e.target.value) })
+            }
             required
           >
             <option value="">Select Category</option>
-            {categories.map(category => (
+            {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
               </option>
@@ -142,11 +177,16 @@ export default function TransactionList() {
           </select>
           <select
             value={formData.paymentMethodId}
-            onChange={e => setFormData({...formData, paymentMethodId: Number(e.target.value)})}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                paymentMethodId: Number(e.target.value),
+              })
+            }
             required
           >
             <option value="">Select Payment Method</option>
-            {paymentMethods.map(method => (
+            {paymentMethods.map((method) => (
               <option key={method.id} value={method.id}>
                 {method.name} (**** **** **** {method.lastDigits})
               </option>
