@@ -27,6 +27,10 @@
 - Mode Mobile :
   - problème de responsive !!
 
-### Liens
+### Lien
 
 [Rapport lighthouse](./LIGHTHOUSECI.md)
+
+### Corrections
+
+- Problème de contraste sur le formulaire de connexion et register :

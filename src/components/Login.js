@@ -1,41 +1,43 @@
-import React, { useCallback, useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import Loader from './Loader';
+import React, { useCallback, useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
+import Loader from "./Loader";
 
 export default function Login() {
   // isLogin tell if the page is the login page or the register page
   const [isLogin, setIsLogin] = useState(true);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login, register } = useAuth();
   const [authLoading, setAuthLoading] = useState(false);
 
-  const handleSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    setAuthLoading(true);
-    setError('');
-    
-    const success = isLogin 
-      ? await login(username, password)
-      : await register(username, password);
-    
-    if (!success) {
-      setError(isLogin ? 'Login failed' : 'Registration failed');
-    }
-    setAuthLoading(false);
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      setAuthLoading(true);
+      setError("");
 
-  }, [isLogin, username, password, login, register, setAuthLoading]);
+      const success = isLogin
+        ? await login(username, password)
+        : await register(username, password);
+
+      if (!success) {
+        setError(isLogin ? "Login failed" : "Registration failed");
+      }
+      setAuthLoading(false);
+    },
+    [isLogin, username, password, login, register, setAuthLoading]
+  );
 
   return (
     <div className="login-container">
-      <h2>{isLogin ? 'Login' : 'Register'}</h2>
+      <h2>{isLogin ? "Login" : "Register"}</h2>
       {error && <div className="error">{error}</div>}
       {authLoading && <Loader />}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          aria-label='Username field'
+          aria-label="Username field"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -46,14 +48,15 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">
-          {isLogin ? 'Login' : 'Register'}
-        </button>
+        <button type="submit">{isLogin ? "Login" : "Register"}</button>
       </form>
-      <button onClick={() => setIsLogin(!isLogin)}>
-        {isLogin ? 'Need to register?' : 'Already have an account?'}
+      {/* ajout d'une classe pour modification css */}
+      <button
+        onClick={() => setIsLogin(!isLogin)}
+        className="button-login-or-register"
+      >
+        {isLogin ? "Need to register?" : "Already have an account?"}
       </button>
     </div>
   );
 }
-
