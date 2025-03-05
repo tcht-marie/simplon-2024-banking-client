@@ -19,7 +19,7 @@ export default function CategoryList() {
 
   useEffect(() => {
     getCategories(auth).then(setCategories);
-  }, [auth]);
+  }, [auth, setCategories]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

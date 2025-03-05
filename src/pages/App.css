@@ -5,25 +5,6 @@
   padding: 16px;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-}
-
-.header-title {
-  text-align: center;
-  margin: 0;
-  margin-bottom: 24px;
-}
-
-.posts-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .login-container {
   display: flex;
   flex-direction: column;
@@ -148,30 +129,32 @@
 }
 
 .nav-links a:hover {
-  color: #1a73e8;
+  color: #004aa3;
   background-color: rgba(26, 115, 232, 0.08);
 }
 
 .nav-links a.active {
-  color: #1a73e8;
+  color: #004aa3;
   background-color: rgba(26, 115, 232, 0.12);
 }
 
-.navbar button {
-  padding: 0.75rem 1.5rem;
-  background-color: #f1f3f4;
-  color: #5f6368;
-  border: none;
-  border-radius: 1rem;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
+@media (max-width: 600px) {
+  .navbar {
+    display: grid;
+    justify-items: center;
+    justify-content: space-around;
+    padding: 0.5rem;
+  }
 
-.navbar button:hover {
-  background-color: #e8eaed;
-  color: #1a73e8;
+  .nav-links {
+    margin: 0;
+    gap: 0;
+  }
+
+  .nav-links a {
+    margin: 0;
+    padding: 0.5rem;
+  }
 }
 
 /* Transaction list styles */
@@ -235,29 +218,6 @@
 .transaction-amount {
   font-weight: bold;
   color: #28a745;
-}
-
-/* Modal styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  min-width: 300px;
-  max-width: 500px;
-  width: 90%;
 }
 
 /* Form styles */
@@ -325,7 +285,7 @@ textarea {
 
 .category-limit {
   font-size: 0.9rem;
-  color: #666;
+  color: black;
 }
 
 .method-digits {

@@ -21,16 +21,20 @@ function AppContent() {
   }
 
   return (
-    <div className="app-container">
-      <Navbar />
-      <div>
-        <Routes>
-          <Route path="/" element={<TransactionList />} />
-          <Route path="/categories" element={<CategoryList />} />
-          <Route path="/payment-methods" element={<PaymentMethodList />} />
-        </Routes>
-      </div>
-    </div>
+    <>
+      <header>
+        <Navbar />
+      </header>
+      <main className="app-container">
+        <div>
+          <Routes>
+            <Route path="/" element={<TransactionList />} />
+            <Route path="/categories" element={<CategoryList />} />
+            <Route path="/payment-methods" element={<PaymentMethodList />} />
+          </Routes>
+        </div>
+      </main>
+    </>
   );
 }
 

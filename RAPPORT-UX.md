@@ -2,30 +2,30 @@
 
 - Page d'accueil == login
 
-  - Modifier le bouton "need to register" pour qu'il soit plus visible
-  - Mettre un message d'erreur clair si user non connu en BDD
-  - Mettre messages d'erreurs clairs si username ou password non remplis
+  - 🤘 Modifier le bouton "need to register" pour qu'il soit plus visible
+  - 🤘 Mettre un message d'erreur clair si user non connu en BDD
+  - 🤘 Mettre messages d'erreurs clairs si username ou password non remplis
 
 - Page Payment Methods
 
-  - Modifier l'emplacement du bouton +
+  - 🤘 Modifier l'emplacement du bouton +
 
 - Page Transaction
 
-  - Modifier l'emplacement du bouton +
+  - 🤘 Modifier l'emplacement du bouton +
   - Les transactions ne s'affichent pas dans l'ordre des dates
-  - Problème de propositions lors du remplissage du premier champ ?
-  - Mettre un message pour dire qu'il faut enregistrer un moyen de paiement avant d'enregistrer une transaction
+  - ❓ Problème de propositions lors du remplissage du premier champ ?
+  - 🤘 Mettre un message pour dire qu'il faut enregistrer un moyen de paiement avant d'enregistrer une transaction
   - Messages d'erreurs dans le formulaire
 
 - Page Categories
 
   - Lors de la suppression d'un item, il ne se supprime pas tout de suite (obligé de recharger la page)
 
-- Bouton Logout : manque le cursor (on ne le voit pas comme un bouton)
+- 🤘 Bouton Logout : manque le cursor (on ne le voit pas comme un bouton)
 
 - Mode Mobile :
-  - problème de responsive !!
+  - 🤘 problème de responsive !!
 
 ### Lien
 
@@ -48,3 +48,26 @@
   - déplacement du bouton d'ajout de transactions pour qu'il soit plus visible et accessible au user
   - changement couleur du bouton et du hover
   -
+
+- Page Categories :
+
+  - déplacement du bouton d'ajout de transactions pour qu'il soit plus visible et accessible au user
+  - changement de la couleur du texte pour la limite
+
+- Page Payment Methods :
+
+  - déplacement du bouton d'ajout de transactions pour qu'il soit plus visible et accessible au user
+
+- Nav Bar :
+
+  - ajout d'une balise header pour mettre la nav bar dedans et non dans la div app-container
+  - modification de la div app-container en balise main
+  - changement de la div Finance Tracker en h1
+  - responsive ok
+
+- Authentication :
+
+  - sauvegarde du token dans le local storage
+
+- Fichier App.css :
+  - suppression de css non utilisé
