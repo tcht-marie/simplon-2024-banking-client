@@ -23,15 +23,6 @@ jobs:
         with:
           node-version: 23
 
-      - name: Désactiver Nexus et forcer npm public
-        run: |
-          echo "registry=https://registry.npmjs.org/" > ~/.npmrc
-          echo "strict-ssl=false" >> ~/.npmrc
-          npm config list
-
-      - name: Supprimer éventuelles dépendances Nexus
-        run: rm -rf node_modules package-lock.json
-
       - name: Install dependencies
         run: npm install --no-cache --prefer-online
 
