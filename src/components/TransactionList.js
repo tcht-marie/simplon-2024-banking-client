@@ -112,9 +112,20 @@ export default function TransactionList() {
                   backgroundColor: getCategoryColor(transaction.categoryId),
                 }}
               />
-              <div className="transaction-content">
-                <div className="transaction-title">{transaction.title}</div>
-                <div className="transaction-amount">
+              <div
+                className="transaction-content"
+                aria-label="Transaction Content"
+              >
+                <div
+                  className="transaction-title"
+                  aria-label="Transaction Title"
+                >
+                  {transaction.title}
+                </div>
+                <div
+                  className="transaction-amount"
+                  aria-label="Transaction Amount"
+                >
                   {formatAmount(transaction.amount)}€
                 </div>
               </div>
@@ -131,6 +142,7 @@ export default function TransactionList() {
         <form onSubmit={handleSubmit} className="transaction-form">
           <input
             type="text"
+            aria-label="Title Input"
             placeholder="Title"
             value={formData.title}
             onChange={(e) =>
@@ -147,6 +159,7 @@ export default function TransactionList() {
           />
           <input
             type="number"
+            aria-label="Amount Input"
             placeholder="Amount"
             value={formData.amount || ""}
             step="0.01"
@@ -157,6 +170,7 @@ export default function TransactionList() {
           />
           <input
             type="date"
+            aria-label="Date Input"
             value={formData.date}
             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
             required

@@ -87,6 +87,7 @@ export default function CategoryList() {
         <form onSubmit={handleSubmit} className="category-form">
           <input
             type="text"
+            aria-label="Category Name Input"
             placeholder="Category Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -94,6 +95,7 @@ export default function CategoryList() {
           />
           <input
             type="color"
+            aria-label="Category Color Input"
             value={formData.color}
             onChange={(e) =>
               setFormData({ ...formData, color: e.target.value })
@@ -102,6 +104,7 @@ export default function CategoryList() {
           />
           <input
             type="number"
+            aria-label="Category Limit Input"
             placeholder="Monthly Limit (optional)"
             value={formData.limit}
             onChange={(e) =>

@@ -26,7 +26,7 @@ function AppContent() {
         <Navbar />
       </header>
       <main className="app-container">
-        <div>
+        <div aria-label="Main">
           <Routes>
             <Route path="/" element={<TransactionList />} />
             <Route path="/categories" element={<CategoryList />} />

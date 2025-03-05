@@ -49,7 +49,7 @@ export default function PaymentMethodList() {
   };
 
   return (
-    <div className="payment-method-list">
+    <div className="payment-method-list" aria-label="Payment Methods List">
       <section className="list-header">
         <h2>Payment Methods</h2>
         <button className="fab-button" onClick={() => setShowNewForm(true)}>
@@ -57,12 +57,18 @@ export default function PaymentMethodList() {
         </button>
       </section>
 
-      <div className="payment-methods">
+      <div className="payment-methods" aria-label="Payment Methods content">
         {paymentMethods.map((method) => (
-          <div key={method.id} className="payment-method-item">
-            <div className="method-content">
-              <div className="method-name">{method.name}</div>
-              <div className="method-digits">
+          <div
+            key={method.id}
+            className="payment-method-item"
+            aria-label="Payment Method item"
+          >
+            <div className="method-content" aria-label="Payment Method content">
+              <div className="method-name" aria-label="Payment Method Name">
+                {method.name}
+              </div>
+              <div className="method-digits" aria-label="Payment Method Digits">
                 **** **** **** {method.lastDigits}
               </div>
             </div>
@@ -85,6 +91,7 @@ export default function PaymentMethodList() {
         <form onSubmit={handleSubmit} className="payment-method-form">
           <input
             type="text"
+            aria-label="Method Name Input"
             placeholder="Method Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -92,6 +99,7 @@ export default function PaymentMethodList() {
           />
           <input
             type="text"
+            aria-label="Last 4 Digits Input"
             placeholder="Last 4 Digits"
             value={formData.lastDigits}
             pattern="\d{4}"

@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <h1 className="nav-brand">Finance Tracker</h1>
-      <div className="nav-links">
+      <div className="nav-links" aria-label="Main Navigation">
         <Link to="/" className={isActive("/")}>
           Transactions
         </Link>
